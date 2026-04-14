@@ -15,8 +15,8 @@
     }
 
     h1 {
-      margin-top: 20vh;
-      font-size: 2.2em;
+      margin-top: 15vh;
+      font-size: 2.5em;
       color: white;
       text-shadow: 0 0 10px #ff4d6d, 0 0 20px #ff4d6d;
       animation: glow 1.5s infinite alternate;
@@ -29,9 +29,10 @@
     }
 
     p {
-      font-size: 1.2em;
+      font-size: 1.4em;
       color: white;
       padding: 0 15px;
+      margin-top: 10px;
     }
 
     .btn {
@@ -89,21 +90,15 @@
 
     /* Mobile tweaks */
     @media (max-width: 480px) {
-      h1 {
-        font-size: 1.8em;
-      }
-      .btn {
-        font-size: 14px;
-        padding: 12px 20px;
-      }
+      h1 { font-size: 2em; }
+      .btn { font-size: 14px; padding: 12px 20px; }
     }
   </style>
 </head>
 
 <body>
 
-  <h1>Hey… I have something to ask you 💌</h1>
-  <h1>DO YOU LOVE ME 💌</h1>
+  <h1>Do you love me? 💌</h1>
   <p>You can’t say no 😏</p>
 
   <button id="yesBtn" class="btn">Yes 💖</button>
@@ -148,7 +143,6 @@
 
     // BIG heart explosion
     yesBtn.addEventListener("click", () => {
-
       document.querySelector("h1").style.display = "none";
       document.querySelector("p").style.display = "none";
       yesBtn.style.display = "none";
