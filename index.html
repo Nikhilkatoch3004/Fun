@@ -2,18 +2,33 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Do You Love Me?</title>
+  <title>For You ❤️</title>
+
   <style>
     body {
+      margin: 0;
       text-align: center;
-      font-family: Arial, sans-serif;
-      background-color: #ffe6e6;
+      font-family: 'Comic Sans MS', cursive;
+      background: linear-gradient(to bottom, #ff9aa2, #ffe6e6);
       overflow: hidden;
     }
 
     h1 {
-      margin-top: 100px;
-      font-size: 2.5em;
+      margin-top: 120px;
+      font-size: 3em;
+      color: white;
+      text-shadow: 0 0 10px #ff4d6d, 0 0 20px #ff4d6d;
+      animation: glow 1.5s infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #ff4d6d; }
+      to { text-shadow: 0 0 25px #ff1a4d; }
+    }
+
+    p {
+      font-size: 1.3em;
+      color: white;
     }
 
     .btn {
@@ -21,52 +36,71 @@
       font-size: 18px;
       margin: 20px;
       border: none;
-      border-radius: 10px;
+      border-radius: 30px;
       cursor: pointer;
+      transition: 0.3s;
     }
 
     #yesBtn {
       background-color: #ff4d6d;
       color: white;
+      box-shadow: 0 0 10px #ff4d6d;
+    }
+
+    #yesBtn:hover {
+      transform: scale(1.1);
     }
 
     #noBtn {
-      background-color: #999;
+      background-color: #666;
       color: white;
       position: absolute;
     }
 
     .heart {
       position: absolute;
-      color: red;
-      font-size: 24px;
-      animation: float 2s linear forwards;
+      font-size: 20px;
+      animation: float 3s linear forwards;
     }
 
     @keyframes float {
       from {
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
         opacity: 1;
       }
       to {
-        transform: translateY(-200px);
+        transform: translateY(-300px) scale(1.5);
         opacity: 0;
       }
     }
+
+    #finalMessage {
+      position: absolute;
+      top: 40%;
+      width: 100%;
+      font-size: 2.5em;
+      color: white;
+      display: none;
+      text-shadow: 0 0 10px red;
+    }
   </style>
 </head>
+
 <body>
 
-  <h1>Do you love me? ❤️</h1>
+  <h1>Hey… I have something to ask you 💌</h1>
+  <p>Think carefully before you answer 😌</p>
 
   <button id="yesBtn" class="btn">Yes 💖</button>
   <button id="noBtn" class="btn">No 😢</button>
+
+  <div id="finalMessage">Yayyy!!! 💖 I knew it!! 😍</div>
 
   <script>
     const noBtn = document.getElementById("noBtn");
     const yesBtn = document.getElementById("yesBtn");
 
-    // Move "No" button randomly
+    // Move "No" button faster 😈
     noBtn.addEventListener("mouseover", () => {
       const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
       const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
@@ -74,24 +108,43 @@
       noBtn.style.top = y + "px";
     });
 
-    // Hearts on YES click
+    // Background floating hearts
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerText = "💖";
+
+      heart.style.left = Math.random() * window.innerWidth + "px";
+      heart.style.top = window.innerHeight + "px";
+
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 3000);
+    }, 300);
+
+    // BIG heart explosion on YES 💥💖
     yesBtn.addEventListener("click", () => {
-      for (let i = 0; i < 30; i++) {
+
+      document.querySelector("h1").style.display = "none";
+      document.querySelector("p").style.display = "none";
+      yesBtn.style.display = "none";
+      noBtn.style.display = "none";
+
+      document.getElementById("finalMessage").style.display = "block";
+
+      for (let i = 0; i < 150; i++) {
         const heart = document.createElement("div");
         heart.classList.add("heart");
-        heart.innerText = "❤️";
+        heart.innerText = ["💖","❤️","💕","💘","💝"][Math.floor(Math.random()*5)];
 
         heart.style.left = Math.random() * window.innerWidth + "px";
         heart.style.top = Math.random() * window.innerHeight + "px";
+        heart.style.fontSize = (Math.random() * 30 + 20) + "px";
 
         document.body.appendChild(heart);
 
-        setTimeout(() => {
-          heart.remove();
-        }, 2000);
+        setTimeout(() => heart.remove(), 3000);
       }
-
-      alert("Yay!! I love you too ❤️🥰");
     });
   </script>
 
