@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>For You ❤️</title>
 
   <style>
@@ -14,11 +15,12 @@
     }
 
     h1 {
-      margin-top: 120px;
-      font-size: 3em;
+      margin-top: 20vh;
+      font-size: 2.2em;
       color: white;
       text-shadow: 0 0 10px #ff4d6d, 0 0 20px #ff4d6d;
       animation: glow 1.5s infinite alternate;
+      padding: 0 10px;
     }
 
     @keyframes glow {
@@ -27,14 +29,15 @@
     }
 
     p {
-      font-size: 1.3em;
+      font-size: 1.2em;
       color: white;
+      padding: 0 15px;
     }
 
     .btn {
-      padding: 15px 30px;
-      font-size: 18px;
-      margin: 20px;
+      padding: 15px 25px;
+      font-size: 16px;
+      margin: 10px;
       border: none;
       border-radius: 30px;
       cursor: pointer;
@@ -47,7 +50,7 @@
       box-shadow: 0 0 10px #ff4d6d;
     }
 
-    #yesBtn:hover {
+    #yesBtn:active {
       transform: scale(1.1);
     }
 
@@ -59,7 +62,6 @@
 
     .heart {
       position: absolute;
-      font-size: 20px;
       animation: float 3s linear forwards;
     }
 
@@ -78,10 +80,22 @@
       position: absolute;
       top: 40%;
       width: 100%;
-      font-size: 2.5em;
+      font-size: 2em;
       color: white;
       display: none;
       text-shadow: 0 0 10px red;
+      padding: 0 10px;
+    }
+
+    /* Mobile tweaks */
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.8em;
+      }
+      .btn {
+        font-size: 14px;
+        padding: 12px 20px;
+      }
     }
   </style>
 </head>
@@ -89,7 +103,7 @@
 <body>
 
   <h1>Hey… I have something to ask you 💌</h1>
-  <p>Think carefully before you answer 😌</p>
+  <p>You can’t say no 😏</p>
 
   <button id="yesBtn" class="btn">Yes 💖</button>
   <button id="noBtn" class="btn">No 😢</button>
@@ -100,15 +114,23 @@
     const noBtn = document.getElementById("noBtn");
     const yesBtn = document.getElementById("yesBtn");
 
-    // Move "No" button faster 😈
-    noBtn.addEventListener("mouseover", () => {
+    function moveNoButton() {
       const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
       const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
       noBtn.style.left = x + "px";
       noBtn.style.top = y + "px";
+    }
+
+    // Works on desktop
+    noBtn.addEventListener("mouseover", moveNoButton);
+
+    // Works on mobile touch 👇
+    noBtn.addEventListener("touchstart", (e) => {
+      e.preventDefault();
+      moveNoButton();
     });
 
-    // Background floating hearts
+    // Floating hearts in background
     setInterval(() => {
       const heart = document.createElement("div");
       heart.classList.add("heart");
@@ -116,13 +138,14 @@
 
       heart.style.left = Math.random() * window.innerWidth + "px";
       heart.style.top = window.innerHeight + "px";
+      heart.style.fontSize = (Math.random() * 20 + 15) + "px";
 
       document.body.appendChild(heart);
 
       setTimeout(() => heart.remove(), 3000);
-    }, 300);
+    }, 400);
 
-    // BIG heart explosion on YES 💥💖
+    // BIG heart explosion
     yesBtn.addEventListener("click", () => {
 
       document.querySelector("h1").style.display = "none";
@@ -132,14 +155,14 @@
 
       document.getElementById("finalMessage").style.display = "block";
 
-      for (let i = 0; i < 150; i++) {
+      for (let i = 0; i < 180; i++) {
         const heart = document.createElement("div");
         heart.classList.add("heart");
         heart.innerText = ["💖","❤️","💕","💘","💝"][Math.floor(Math.random()*5)];
 
         heart.style.left = Math.random() * window.innerWidth + "px";
         heart.style.top = Math.random() * window.innerHeight + "px";
-        heart.style.fontSize = (Math.random() * 30 + 20) + "px";
+        heart.style.fontSize = (Math.random() * 25 + 20) + "px";
 
         document.body.appendChild(heart);
 
